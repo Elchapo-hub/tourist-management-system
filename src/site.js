@@ -18,16 +18,6 @@
     });
   }
   document.addEventListener('DOMContentLoaded', () => {
-    // The site home page is index.html. Repair legacy links that referenced a
-    // non-existent runafrica.html file so the destination directory is reachable.
-    const onHomePage = /(?:^|\/)index\.html$/.test(location.pathname) || location.pathname.endsWith('/pages/');
-    document.querySelectorAll('a[href="runafrica.html"]').forEach(link => {
-      link.href = 'index.html';
-    });
-    document.querySelectorAll('a[href="runafrica.html#destinations-section"]').forEach(link => {
-      link.href = onHomePage ? '#destinations-section' : 'index.html#destinations-section';
-    });
-
     document.querySelectorAll('button').forEach(button => { const text = button.textContent.trim().toLowerCase(); if (text === 'en' || text === 'sw') button.dataset.language ||= text; });
     document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => { const language = button.dataset.language === 'sw' ? 'sw' : 'en'; localStorage.setItem(key, language); apply(language); }));
     apply(localStorage.getItem(key) === 'sw' ? 'sw' : 'en');
